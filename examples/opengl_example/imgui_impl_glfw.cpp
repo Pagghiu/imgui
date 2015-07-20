@@ -12,6 +12,7 @@
 #define GLFW_EXPOSE_NATIVE_WGL
 #include <GLFW/glfw3native.h>
 #endif
+#include "fontAwesome.inl"
 
 // Data
 static GLFWwindow*  g_Window = NULL;
@@ -137,6 +138,17 @@ void ImGui_ImplGlfw_CharCallback(GLFWwindow*, unsigned int c)
 bool ImGui_ImplGlfw_CreateDeviceObjects()
 {
     ImGuiIO& io = ImGui::GetIO();
+
+	io.Fonts->AddFontDefault();
+
+	static const ImWchar ranges[] =
+	{
+		0xF000, 0xF239,
+		0,
+	};
+
+	ImFont* fontAwesome = io.Fonts->AddFontFromMemoryCompressedTTF(fontAwesome_compressed_data, fontAwesome_compressed_size, 20, 0, ranges);
+
 
     // Build texture
     unsigned char* pixels;
